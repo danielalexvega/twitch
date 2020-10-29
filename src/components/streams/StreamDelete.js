@@ -12,16 +12,22 @@ class StreamDelete extends React.Component {
   }
 
   renderActions() {
+    const { id } = this.props.match.params;
     return (
       <React.Fragment>
-        <button className='ui button negative'>Delete</button>
-        <button className='ui button'>Cancel</button>
+        <button
+          className='ui button negative'
+          onClick={() => this.props.deleteStream(id)}
+        >
+          Delete
+        </button>
+        <Link className='ui button' to='/'>Cancel</Link>
       </React.Fragment>
     );
   }
 
   renderContent() {
-    if(!this.props.stream) {
+    if (!this.props.stream) {
       return 'Are you sure you want to delete this stream?'
     }
 
@@ -30,12 +36,12 @@ class StreamDelete extends React.Component {
 
   render() {
     return (
-        <Modal
-          title='Delete Stream'
-          content={this.renderContent()}
-          actions={this.renderActions()}
-          onDismiss={() => history.push('/')}
-        />
+      <Modal
+        title='Delete Stream'
+        content={this.renderContent()}
+        actions={this.renderActions()}
+        onDismiss={() => history.push('/')}
+      />
     );
   }
 }
